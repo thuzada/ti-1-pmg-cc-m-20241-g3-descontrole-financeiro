@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crédito Inteligente - Login</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #1a1a1a;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100vh;
+        padding-right: 20px;
+      }
+
+      .card {
+        width: 280px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: #ffffff;
+      }
+
+      .inputbox h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #333333;
+      }
+
+      .inputbox form input[type="date"],
+      .inputbox form input[type="text"],
+      .inputbox form input[type="password"],
+      .inputbox form input[type="email"],
+      .inputbox form input[type="submit"] {
+        width: calc(100% - 20px);
+        margin-bottom: 20px;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #f2f2f2;
+        color: #333333;
+      }
+
+      .inputbox form input[type="submit"] {
+        background-color: #007bff;
+        color: #ffffff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .inputbox form input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      .inputbox p {
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #333333;
+      }
+
+      .register-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #28a745;
+        color: #ffffff;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .register-btn:hover {
+        background-color: #218838;
+      }
+
+      body::-webkit-scrollbar {
+        width: 10px;
+        background-color: #ffffff;
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background-color: #3cb371;
+        border-radius: 5px;
+      }
+
+      .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-background">
+      <video autoplay loop muted>
+        <source src="assets/video/inicial2 (1).mp4" />
+        Seu navegador não suporta o elemento de vídeo.
+      </video>
+    </div>
+
+    <div class="card text-card" style="margin-left: auto">
+      <div class="inputbox">
+        <h2>Acessar</h2>
+        <form
+          id="loginForm"
+          action="assets/pages/telainicial.html"
+          method="post"
+        >
+          <input type="text" name="email" placeholder="E-mail" required /><br />
+          <input
+            type="password"
+            name="senha"
+            placeholder="Senha"
+            required
+          /><br />
+          <input type="submit" value="Acessar" class="register-btn" />
+        </form>
+        <p>Ou</p>
+        <a href="assets/pages/cadastro.html" class="register-btn"
+          >Cadastre-se</a
+        >
+      </div>
+    </div>
+
+    <script>
+      window.onload = function () {
+        var loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var userData = localStorage.getItem("userData");
+          if (!userData) {
+            alert(
+              "Nenhum usuário cadastrado. Por favor, cadastre-se primeiro."
+            );
+            return;
+          }
+
+          var formData = JSON.parse(userData);
+          var email = document.getElementsByName("email")[0].value;
+          var senha = document.getElementsByName("senha")[0].value;
+
+          if (email === formData.email && senha === formData.senha) {
+            window.location.href = loginForm.getAttribute("action");
+          } else {
+            alert("E-mail ou senha incorretos. Por favor, tente novamente.");
+          }
+        });
+      };
+    </script>
+  </body>
+</html>
